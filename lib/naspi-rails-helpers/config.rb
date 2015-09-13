@@ -3,10 +3,15 @@ module NaspiRailsHelpers
 
     def initialize
       @config = {}
-      @mergeNaspiConfig()
-      @mergeNaspiUserConfig()
-      puts '---------------------------'
-      puts @config
+      @environments = []
+      mergeNaspiConfig
+      mergeNaspiUserConfig
+      mergeEnvironments
+    end
+
+    def option(key, env_name = nil)
+      env_name ||= ::Rails.env
+      @config[env_name][key]
     end
 
 
@@ -27,8 +32,28 @@ module NaspiRailsHelpers
     end
 
     def mergeConfigFile(path)
-      json = File.read(path)
-      @config = @config.merge(JSON.parse(json) || {})
+      yaml = YAML.load_file(path) || {}
+
+      @config.merge!(yaml)
+    end
+
+    def mergeEnvironments
+      @environments = @config.keys
+      config        = {}
+
+      @environments.each do |env_name|
+        if env_name != 'defaults'
+          config[env_name] = {}.merge(@config['defaults'])
+        end
+      end
+
+      @environments.each do |env_name|
+        if env_name != 'defaults'
+          config[env_name] = config[env_name].merge(@config[env_name])
+        end
+      end
+
+      @config = config
     end
 
   end

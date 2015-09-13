@@ -3,13 +3,14 @@ require 'yaml'
 require 'json'
 
 require 'naspi-rails-helpers/config'
+require 'naspi-rails-helpers/manifest'
 require 'naspi-rails-helpers/helpers/assets_include_helper'
 require 'naspi-rails-helpers/engine'
 
 module NaspiRailsHelpers
 
   # rails app
-  mattr_accessor :app
+  mattr_accessor :rails_app
 
   # naspi root folder
   mattr_accessor :root
@@ -24,5 +25,8 @@ module NaspiRailsHelpers
 
   # config
   mattr_accessor :config
+
+  # manifest
+  mattr_accessor :manifest
 
 end

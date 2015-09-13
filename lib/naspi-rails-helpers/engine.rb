@@ -12,9 +12,10 @@ module NaspiRailsHelpers
 
     # startup
     initializer 'naspi-rails-helpers.load_app_root' do |app|
-      NaspiRailsHelpers.app = app
+      NaspiRailsHelpers.rails_app = app
       NaspiRailsHelpers.root = app.root
       NaspiRailsHelpers.config ||= NaspiRailsHelpers::Config.new
+      NaspiRailsHelpers.manifest ||= NaspiRailsHelpers::Manifest.new
     end
 
   end
