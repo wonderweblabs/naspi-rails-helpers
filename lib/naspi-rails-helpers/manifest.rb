@@ -18,7 +18,7 @@ module NaspiRailsHelpers
     def resolve_absolute_path(file)
       mappedPath = resolve_path(file) || ''
 
-      File.join(NaspiRailsHelpers.root, 'public', path)
+      File.join(NaspiRailsHelpers.root, NaspiRailsHelpers.assets_lookup_path, file)
     end
 
   end

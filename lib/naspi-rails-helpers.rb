@@ -23,6 +23,10 @@ module NaspiRailsHelpers
   mattr_accessor :user_config_file
   @@user_config_file = '.naspi.yml'
 
+  # default lookup path for assets
+  mattr_accessor :assets_lookup_path
+  @@assets_lookup_path = 'public/assets'
+
   # config
   mattr_accessor :config
 
