@@ -43,13 +43,13 @@ module NaspiRailsHelpers
 
       @environments.each do |env_name|
         if env_name != 'defaults'
-          config[env_name] = {}.merge(@config['defaults'])
+          config[env_name] = {}.merge(@config['defaults'] || {})
         end
       end
 
       @environments.each do |env_name|
         if env_name != 'defaults'
-          config[env_name] = config[env_name].merge(@config[env_name])
+          config[env_name] = config[env_name].merge(@config[env_name] || {})
         end
       end
 
